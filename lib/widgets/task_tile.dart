@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:todo_appv2/addTaskScreen.dart';
 import 'package:todo_appv2/database/todo_data.dart';
 
+var ind=0;
+
 class TaskTile extends StatelessWidget {
   final int? id;
   final String? taskTitle;
@@ -11,7 +13,6 @@ class TaskTile extends StatelessWidget {
   final TimeOfDay? taskTime;
 
   TaskTile(this.id,this.taskTitle,this.taskDate,this.taskTime);
-  var ind=0;
   @override
   Widget build(BuildContext context) {
     ind=this.id!;
@@ -45,7 +46,11 @@ class TaskTile extends StatelessWidget {
               trailing:Wrap(
                    children: <Widget>[
                     IconButton(onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTask(isNew: false)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTask(
+                          isNew: false,
+                      )
+                        )
+                      );
                 },
                     icon: Icon(Icons.edit, color: Theme.of(context).accentColor,),
                 ),
