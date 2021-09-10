@@ -6,10 +6,8 @@ import 'theme/constant_color.dart';
 import 'package:flutter/widgets.dart';
 import 'database/todo_data.dart';
 
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  print('hello');
   runApp(MyApp());
 }
 
