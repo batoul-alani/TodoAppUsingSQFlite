@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'database/todo.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_appv2/widgets/task_tile.dart';
 import 'database/todo_data.dart';
+import 'database/todo.dart';
 
 String? taskTitle;
 class AddTask extends StatelessWidget {
-  TodosDatabase notesDatabase=TodosDatabase();
-  bool? isNew=true;
+  final TodosDatabase todosDatabase=TodosDatabase();
+  final bool isNew;
+
   AddTask({required this.isNew});
 
   @override
@@ -30,9 +32,7 @@ class AddTask extends StatelessWidget {
             height: 50.0,
             child: TextButton(
               onPressed: () async{
-                isNew==true ?
-                await newItem(context)
-                    :await updateItem(context);
+                isNew==true? newItem(context):updateItem(context);
               },
               child: Text('حفظ',
               style: TextStyle(fontSize: 24.0,fontFamily: 'Hacen',color:Colors.white),textAlign: TextAlign.center,),
@@ -132,11 +132,15 @@ class AddTask extends StatelessWidget {
   }
 
   Future updateItem(BuildContext context)async{
-    var updatedTodo=Todo(title: taskTitle!,dateTime:Provider.of<TodosDatabase>(context,listen: false).selectedDate2 , timeOfDay:Provider.of<TodosDatabase>(context,listen: false).selectedTime2);
+    var indexOfTodo=ind;
+    print('this is nor time $indexOfTodo');
+    Todo reading=await Provider.of<TodosDatabase>(context,listen: false).readTodo(indexOfTodo);
+    var updatedTodo=reading;
     final todo=updatedTodo.copy(
       title: taskTitle,dateTime: Provider.of<TodosDatabase>(context,listen: false).selectedDate2,timeOfDay: Provider.of<TodosDatabase>(context,listen: false).selectedTime2,
     );
     await Provider.of<TodosDatabase>(context,listen: false).update(todo);
     Navigator.pop(context);
+
   }
 }
