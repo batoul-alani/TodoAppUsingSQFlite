@@ -103,8 +103,7 @@ class TodosDatabase extends ChangeNotifier{
   Future<int> update(Todo todo)async{
     final dbb=await instance.database;
     notifyListeners();
-    return dbb.update(tableTodo, todo.toMap(),where: '${TDate.i}=?',whereArgs: [todo.id]);
-
+    return await dbb.update(tableTodo, todo.toMap(),where: '${TDate.i}=?',whereArgs: [todo.id]);
   }
 
   Future<int> delete(int id) async{
