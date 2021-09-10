@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'addTaskScreen.dart';
 import 'widgets/task_list.dart';
+import 'database/todo_data.dart';
+import 'database/todo.dart';
+import 'package:provider/provider.dart';
 
 class TaskScreen extends StatelessWidget {
   @override
@@ -17,9 +20,11 @@ class TaskScreen extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-            print('go to add screen');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddTask(isNew: true,)));
+        onPressed: ()async{
+            //Add Item
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddTask(
+                isNew: true,
+              )));
           },
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(
